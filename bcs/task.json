@@ -1,0 +1,114 @@
+{
+  "atomCode": "bcs",
+  "execution": {
+    "packagePath": "bcs-jar-with-dependencies.jar",
+    "language": "java",
+    "minimumVersion": "1.8",
+    "demands": [],
+    "target": "$bk_java_path -jar bcs-jar-with-dependencies.jar"
+  },
+  "input": {
+    "ccAppId": {
+      "hidden": true,
+      "rule": {},
+      "required": true,
+      "default": ""
+    },
+    "projectId": {
+      "hidden": true,
+      "rule": {},
+      "required": true,
+      "default": ""
+    },
+    "accessToken": {
+      "hidden": true,
+      "rule": {},
+      "required": true,
+      "default": ""
+    },
+    "opType": {
+      "rule": {},
+      "component": "selector",
+      "required": true,
+      "searchable": false,
+      "label": "操作类型",
+      "list": [
+        {
+          "id": "create",
+          "name": "create"
+        },
+        {
+          "id": "recreate",
+          "name": "recreate"
+        },
+        {
+          "id": "scale",
+          "name": "scale"
+        },
+        {
+          "id": "rollingupdate",
+          "name": "rollingupdate"
+        },
+        {
+          "id": "delete",
+          "name": "delete"
+        }
+      ],
+      "default": "create"
+    },
+    "category": {
+      "rule": {},
+      "component": "selector",
+      "required": true,
+      "searchable": false,
+      "label": "对象类型",
+      "list": [
+        {
+          "id": "deployment",
+          "name": "Deployment"
+        },
+        {
+          "id": "job",
+          "name": "Job"
+        },
+        {
+          "id": "daemonSet",
+          "name": "daemonSet"
+        },
+        {
+          "id": "statefulSet",
+          "name": "statefulSet"
+        }],
+      "default": ""
+    },
+    "bcsAppInstName": {
+      "rule": {},
+      "component": "auto-complete",
+      "required": true,
+      "hidden": true,
+      "searchable": true,
+      "settingKey": "name",
+      "displayKey": "name",
+      "label": "应用程序名称",
+      "optionsConf": {
+        "searchable": true,
+        "multiple": false,
+        "url": "https://bk.cros.wr.pvp.net/apps/cc_app_ids/{ccAppId}/projects/{projectId}/instances/?category={category}&namespace={namespace}&accessToken={accessToken}",
+        "paramId": "id",
+        "paramName": "name"
+      },
+      "default": ""
+    },
+    "timeout": {
+      "rule": {
+        "numeric": true
+      },
+      "type": "text",
+      "required": true,
+      "component": "vuex-input",
+      "label": "超时时间(单位为分钟)",
+      "placeholder": "请输入数字，单位为分钟",
+      "default": "60"
+    }
+  }
+}
