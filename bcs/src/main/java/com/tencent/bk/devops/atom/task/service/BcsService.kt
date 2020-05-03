@@ -7,7 +7,7 @@ import com.tencent.bk.devops.atom.task.BcsContainerAtom
 import com.tencent.bk.devops.atom.task.pojo.BcsContainerParam
 import com.tencent.bk.devops.atom.task.pojo.TaskResult
 import com.tencent.bk.devops.atom.task.pojo.enum.BcsCategory
-import com.tencent.bk.devops.plugin.utils.OkhttpUtils
+import com.tencent.bk.devops.atom.task.utils.OkhttpUtils
 import okhttp3.MediaType
 import okhttp3.Request
 import okhttp3.RequestBody

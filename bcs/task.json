@@ -9,30 +9,39 @@
   },
   "input": {
     "ccAppId": {
-      "hidden": true,
-      "rule": {},
-      "required": true,
-      "default": ""
+      "label": "cc业务Id",
+      "default": "",
+      "type": "vuex-input",
+      "required": false,
+      "disabled": false,
+      "hidden": false,
+      "isSensitive": false
     },
     "projectId": {
-      "hidden": true,
-      "rule": {},
-      "required": true,
-      "default": ""
+      "label": "项目Id",
+      "default": "",
+      "type": "vuex-input",
+      "required": false,
+      "disabled": false,
+      "hidden": false,
+      "isSensitive": false
     },
     "accessToken": {
-      "hidden": true,
-      "rule": {},
-      "required": true,
-      "default": ""
+      "label": "accessToken",
+      "default": "",
+      "type": "vuex-input",
+      "required": false,
+      "disabled": false,
+      "hidden": false,
+      "isSensitive": false
     },
     "opType": {
-      "rule": {},
       "component": "selector",
+      "type": "selector",
       "required": true,
       "searchable": false,
       "label": "操作类型",
-      "list": [
+      "options": [
         {
           "id": "create",
           "name": "create"
@@ -57,12 +66,12 @@
       "default": "create"
     },
     "category": {
-      "rule": {},
+      "type": "selector",
       "component": "selector",
       "required": true,
       "searchable": false,
       "label": "对象类型",
-      "list": [
+      "options": [
         {
           "id": "deployment",
           "name": "Deployment"
@@ -81,11 +90,37 @@
         }],
       "default": ""
     },
-    "bcsAppInstName": {
-      "rule": {},
-      "component": "auto-complete",
+    "namespace": {
+      "type": "selector",
       "required": true,
-      "hidden": true,
+      "hidden": false,
+      "searchable": true,
+      "settingKey": "name",
+      "displayKey": "name",
+      "label": "所属命名空间",
+      "optionsConf": {
+        "searchable": true,
+        "multiple": false,
+        "url": "https://bk.cros.wr.pvp.net/apps/cc_app_ids/{ccAppId}/projects/{projectId}/namespaces/?access_token={accessToken}",
+        "paramId": "id",
+        "paramName": "name"
+      },
+      "rely": {
+        "operation": "AND",
+        "expression": [
+          {
+            "key": "opType",
+            "value": "rollingupdate"
+          }
+        ]
+      },
+      "list": [],
+      "default": ""
+    },
+    "bcsAppInstName": {
+      "type": "selector",
+      "required": true,
+      "hidden": false,
       "searchable": true,
       "settingKey": "name",
       "displayKey": "name",
@@ -97,6 +132,180 @@
         "paramId": "id",
         "paramName": "name"
       },
+      "rely": {
+        "operation": "AND",
+        "expression": [
+          {
+            "key": "opType",
+            "value": "rollingupdate"
+          }
+        ]
+      },
+      "default": ""
+    },
+    "bcsInstName": {
+      "type": "selector",
+      "required": true,
+      "hidden": false,
+      "label": "应用实例化名称",
+      "list": "",
+      "optionsConf": {
+        "searchable": true,
+        "multiple": false,
+        "url": "https://bk.cros.wr.pvp.net/apps/cc_app_ids/{ccAppId}/projects/{projectId}/instances/",
+        "paramId": "id",
+        "paramName": "name"
+      },
+      "default": "",
+      "desc": "当实例数与变量值不一致时，则以这里填写的实例数为准"
+    },
+    "bcsInstNum": {
+      "type": "vuex-input",
+      "required": true,
+      "hidden": false,
+      "label": "应用实例化个数",
+      "list": "",
+      "default": "",
+      "rely": {
+        "operation": "AND",
+        "expression": [
+          {
+            "key": "opType",
+            "value": "rollingupdate"
+          }
+        ]
+      },
+      "desc": "当实例数与变量值不一致时，则以这里填写的实例数为准"
+    },
+    "clusterId": {
+      "type": "selector",
+      "label": "集群",
+      "required": true,
+      "hidden": false,
+      "searchable": true,
+      "optionsConf": {
+        "searchable": true,
+        "multiple": false,
+        "url": "https://bk.cros.wr.pvp.net/apps/cc_app_ids/{ccAppId}/projects/{projectId}/instances/",
+        "paramId": "id",
+        "paramName": "name"
+      },
+      "rely": {
+        "operation": "AND",
+        "expression": [
+          {
+            "key": "opType",
+            "value": "create"
+          }
+        ]
+      },
+      "default": ""
+    },
+    "musterId": {
+      "type": "selector",
+      "required": true,
+      "hidden": false,
+      "searchable": true,
+      "displayKey": "name",
+      "label": "模板集",
+      "placeholder": "请选择",
+      "optionsConf": {
+        "searchable": true,
+        "multiple": false,
+        "url": "https://bk.cros.wr.pvp.net/apps/cc_app_ids/${ccAppId}/projects/${projectId}/musters/?accessToken=${accessToken}",
+        "paramId": "id",
+        "paramName": "name"
+      },
+      "rely": {
+        "operation": "AND",
+        "expression": [
+          {
+            "key": "opType",
+            "value": "create"
+          }
+        ]
+      },
+      "default": ""
+    },
+    "showVersionName": {
+      "type": "selector",
+      "required": true,
+      "hidden": false,
+      "searchable": true,
+      "settingKey": "name",
+      "displayKey": "name",
+      "optionsConf": {
+        "searchable": true,
+        "multiple": false,
+        "url": "https://bk.cros.wr.pvp.net/apps/cc_app_ids/${ccAppId}/projects/${projectId}/musters/${musterId}/versions/?accessToken=${accessToken}",
+        "paramId": "id",
+        "paramName": "name"
+      },
+      "rely": {
+        "operation": "AND",
+        "expression": [
+          {
+            "key": "opType",
+            "value": "create"
+          }
+        ]
+      },
+      "label": "模板集版本",
+      "list": [],
+      "default": ""
+    },
+    "templateName": {
+      "type": "vuex-input",
+      "required": true,
+      "hidden": false,
+      "searchable": true,
+      "settingKey": "name",
+      "displayKey": "name",
+      "label": "模板",
+      "list": [],
+      "rely": {
+        "operation": "AND",
+        "expression": [
+          {
+            "key": "opType",
+            "value": "create"
+          }
+        ]
+      },
+      "default": ""
+    },
+    "namespaceVar": {
+      "type": "vuex-input",
+      "required": false,
+      "hidden": false,
+      "label": "命名空间参数",
+      "default": []
+    },
+    "instVersionName": {
+      "type": "selector",
+      "required": true,
+      "hidden": false,
+      "searchable": true,
+      "settingKey": "name",
+      "displayKey": "name",
+      "label": "应用实例版本",
+      "optionsConf": {
+        "searchable": true,
+        "multiple": false,
+        "url": "https://bk.cros.wr.pvp.net/apps/cc_app_ids/{ccAppId}/projects/{projectId}/instances/{bcsInstName}/version/?accessToken={accessToken}",
+        "paramId": "id",
+        "paramName": "name"
+      },
+      "rely": {
+        "operation": "AND",
+        "expression": [
+          {
+            "key": "opType",
+            "value": "rollingupdate"
+          }
+        ]
+      },
+      "list": [],
       "default": ""
     },
     "timeout": {

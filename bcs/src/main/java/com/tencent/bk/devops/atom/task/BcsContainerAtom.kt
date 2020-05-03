@@ -1,6 +1,5 @@
 package com.tencent.bk.devops.atom.task
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.tencent.bk.devops.atom.AtomContext
@@ -12,8 +11,8 @@ import com.tencent.bk.devops.atom.task.pojo.enum.BcsCategory
 import com.tencent.bk.devops.atom.task.pojo.enum.BcsOperation
 import com.tencent.bk.devops.atom.task.service.BcsService
 import com.tencent.bk.devops.atom.task.service.ConfigService
-import com.tencent.bk.devops.plugin.utils.OkhttpUtils
 import okhttp3.Request
+import com.tencent.bk.devops.atom.task.utils.OkhttpUtils
 import org.slf4j.LoggerFactory
 import java.lang.Exception
 import java.lang.RuntimeException
