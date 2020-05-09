@@ -1,0 +1,390 @@
+{
+    "atomCode": "bcs",
+    "execution": {   
+        "packagePath": "bcs-1.0.0.tar.gz", 
+        "language": "python",
+        "demands": [
+            "pip install --upgrade bcs-1.0.0.tar.gz"
+        ],
+        "target": "bcs"
+    },
+    "input": {
+        "project_id": {
+            "label": "项目",
+            "type": "selector",
+            "groupName": "",
+            "placeholder": "请选择项目",
+            "optionsConf": {
+                "searchable": true,
+                "url": "/backend/api/bcs-cc/projects/",
+                "dataPath": "data.results",
+                "paramId": "project_id",
+                "paramName": "project_name"
+            }
+        },
+        "cluster_id": {
+            "label": "集群",
+            "type": "select-input",
+            "groupName": "",
+            "placeholder": "请选择部署到的集群",
+            "optionsConf": {
+                "searchable": true,
+                "url": "/backend/api/bcs-cc/projects/{project_id}/clusters/",
+                "dataPath": "data.results",
+                "paramId": "cluster_id",
+                "paramName": "name"
+            }
+        },
+        "oper_type": {
+            "label": "操作类型",
+            "type": "selector",
+            "groupName": "",
+            "placeholder": "请选择操作类型",
+            "options": [
+                {
+                    "id": "rollingupdate",
+                    "name": "rollingupdate"
+                },
+                {
+                    "id": "command",
+                    "name": "command"
+                },
+                {
+                    "id": "create",
+                    "name": "create"
+                },
+                {
+                    "id": "recreate",
+                    "name": "recreate"
+                },
+                {
+                    "id": "scale",
+                    "name": "scale"
+                },
+                {
+                    "id": "delete",
+                    "name": "delete"
+                },
+                {
+                    "id": "signal",
+                    "name": "signal"
+                }
+            ]
+        },
+        "resource_kind": {
+            "label": "对象类型",
+            "type": "selector",
+            "groupName": "",
+            "placeholder": "请选择资源类型",
+            "options": [
+                {
+                    "id": "Deployment",
+                    "name": "Deployment"
+                },
+                {
+                    "id": "Application",
+                    "name": "Application"
+                }
+            ]
+        },
+        "namespace_name": {
+            "label": "命名空间名称",
+            "type": "vuex-input",
+            "placeholder": "请输入命名空间",
+            "rely": {
+                "operation": "OR",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "recreate"
+                    },{
+                        "key": "oper_type",
+                        "value": "scale"
+                    },{
+                        "key": "oper_type",
+                        "value": "rollingupdate"
+                    },{
+                        "key": "oper_type",
+                        "value": "delete"
+                    },{
+                        "key": "oper_type",
+                        "value": "delete"
+                    },{
+                        "key": "oper_type",
+                        "value": "signal"
+                    },{
+                        "key": "oper_type",
+                        "value": "command"
+                    }
+                ]
+            }
+        },
+        "app_name": {
+            "label": "应用程序名称",
+            "type": "vuex-input",
+            "placeholder": "请输入名称",
+            "rely": {
+                "operation": "OR",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "recreate"
+                    },{
+                        "key": "oper_type",
+                        "value": "scale"
+                    },{
+                        "key": "oper_type",
+                        "value": "rollingupdate"
+                    },{
+                        "key": "oper_type",
+                        "value": "delete"
+                    },{
+                        "key": "oper_type",
+                        "value": "delete"
+                    },{
+                        "key": "oper_type",
+                        "value": "signal"
+                    },{
+                        "key": "oper_type",
+                        "value": "command"
+                    }
+                ]
+            }
+        },
+        "instance_count": {
+            "label": "应用实例个数",
+            "type": "vuex-input",
+            "placeholder": "请输入要实例化的应用的个数",
+            "desc": "当实例数与变量值不一致时，则以这里填写的实例数为准",
+            "rely": {
+                "operation": "OR",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "scale"
+                    },
+                    {
+                        "key": "oper_type",
+                        "value": "rollingupdate"
+                    }
+                ]
+            }
+        },
+        "template_set": {
+            "label": "模板集",
+            "type": "vuex-input",
+            "placeholder": "请输入模板集名称",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "create"
+                    }
+                ]
+            }
+        },
+        "template_set_version": {
+            "label": "应用实例版本",
+            "type": "vuex-input",
+            "placeholder": "请输入版本",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "rollingupdate"
+                    }
+                ]
+            }
+        },
+        "template_set_version_for_create": {
+            "label": "模板集版本",
+            "type": "vuex-input",
+            "placeholder": "请输入模板集版本",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "create"
+                    }
+                ]
+            }
+        },
+        "vars": {
+            "label": "实例版本参数",
+            "type": "atom-ace-editor",
+            "placeholder": "请输入实例版本参数，格式: {key1: value1, key2: value2}",
+            "desc": "格式: {key1: value1, key2: value2}",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "rollingupdate"
+                    }
+                ]
+            }
+        },
+        "template_name": {
+            "label": "模板",
+            "type": "vuex-input",
+            "placeholder": "请输入名称",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "create"
+                    }
+                ]
+            }
+        },
+        "namespace_vars": {
+            "label": "命名空间参数",
+            "type": "atom-ace-editor",
+            "placeholder": "请输入需要的命名空间参数",
+            "desc": "格式: {命名空间名称: {key1: value1, key2: value2}}",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "create"
+                    }
+                ]
+            }
+        },
+        "process_name": {
+            "label": "进程名称",
+            "type": "vuex-input",
+            "placeholder": "请输入进程名称",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "signal"
+                    }
+                ]
+            }
+        },
+        "signal": {
+            "label": "信号值",
+            "type": "vuex-input",
+            "placeholder": "请输入信号值",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "signal"
+                    }
+                ]
+            }
+        },
+        "command": {
+            "label": "命令",
+            "type": "vuex-input",
+            "placeholder": "请输入命令，如: ps",
+            "desc": "如: ps",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "command"
+                    }
+                ]
+            }
+        },
+        "command_vars": {
+            "label": "命令参数",
+            "type": "vuex-input",
+            "placeholder": "请输入命令，如: -a",
+            "desc": "如:-a，结合 命令 使用",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "command"
+                    }
+                ]
+            }
+        },
+        "username": {
+            "label": "用户身份",
+            "type": "vuex-input",
+            "placeholder": "请输入执行命令的用户身份",
+            "desc": "默认为root用户",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "command"
+                    }
+                ]
+            }
+        },
+        "workdir": {
+            "label": "工作目录",
+            "type": "vuex-input",
+            "placeholder": "请输入工作目录",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "command"
+                    }
+                ]
+            }
+        },
+        "privileged": {
+            "label": "",
+            "type": "atom-checkbox",
+            "text": "是否拥有特权",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "command"
+                    }
+                ]
+            }
+        },
+        "reserve_time": {
+            "label": "任务信息保存时间，单位: 分钟",
+            "type": "vuex-input",
+            "placeholder": "请输入任务信息保存时间，默认是 24607 分钟",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "command"
+                    }
+                ]
+            }
+        },
+        "dict_vars": {
+            "label": "环境变量",
+            "type": "atom-ace-editor",
+            "placeholder": "请输入环境变量，格式: {key1: value1, key2: value2}",
+            "desc": "格式: {key1: value1, key2: value2}",
+            "rely": {
+                "operation": "AND",
+                "expression": [
+                    {
+                        "key": "oper_type",
+                        "value": "command"
+                    }
+                ]
+            }
+        }
+    }
+}
