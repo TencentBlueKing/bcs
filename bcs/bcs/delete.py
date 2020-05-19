@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+import time
 
 from .python_atom_sdk import *
 sdk = AtomSDK()
 
 from . import base as params_utils
 from components import bcs_app
-from .constants import DELETE_OPER
+from .constants import DELETE_OPER, WAIT_POLLING_TIME
 
 from .polling_task import polling
 
@@ -32,5 +33,7 @@ def delete(cc_app_id, project_id, params):
         "inst_id_list": [instance_id]
     }
     bcs_app.delete_app(cc_app_id, project_id, data)
+    # 等待10s
+    time.sleep(WAIT_POLLING_TIME)
     # 轮训任务
     polling(cc_app_id, project_id, instance_id, oper_type=DELETE_OPER)

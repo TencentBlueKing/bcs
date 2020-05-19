@@ -60,7 +60,7 @@ def get_vars(params):
         exit(-1)
     if not vars:
         return []
-    return [{key: val} for key, val in vars.items()]
+    return ["%s=%s" %(key, val) for key, val in vars.items()]
 
 
 def get_instance_id(cc_app_id, project_id, resource_kind, ns_name, app_name):

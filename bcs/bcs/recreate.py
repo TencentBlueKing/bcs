@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 
 from .python_atom_sdk import *
 sdk = AtomSDK()
@@ -6,7 +7,7 @@ sdk = AtomSDK()
 from .base import get_resource_kind, get_namespace, get_app_name
 from .utils import validate_param
 from .polling_task import polling
-
+from .constants import WAIT_POLLING_TIME
 from components import bcs_app
 
 
@@ -32,5 +33,7 @@ def recreate(cc_app_id, project_id, params):
         "inst_id_list": [instance_id]
     }
     bcs_app.recreate_app(cc_app_id, project_id, data)
+    # 等待10s
+    time.sleep(WAIT_POLLING_TIME)
     # 轮训重建任务
     polling(cc_app_id, project_id, instance_id)
