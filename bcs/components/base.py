@@ -26,7 +26,7 @@ def http_request(method, url, params=None, data=None, **kwargs):
         exit(-1)
     # 判断返回码是否正确
     if resp_json.get("code") not in SUCCESS_CODE:
-        sdk.log.error("request api error, %s", resp_json.get("message"))
+        sdk.log.error("request api error, url: %s error: %s", url, resp_json.get("message"))
         exit(-1)
 
     return resp_json

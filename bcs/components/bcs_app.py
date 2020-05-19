@@ -86,6 +86,13 @@ def rollingupdate_app(cc_app_id, project_id, params, data):
     return bcs_app_request("PUT", url, params=params, data=data)
 
 
+def rollingupdate_app_new(cc_app_id, project_id, instance_id, params, data):
+    url = "{}/api/apigw/paas-cd/prod/apps/cc_app_ids/{}/projects/{}/instances/{}/update//".format(
+            APIGW_HOST, cc_app_id, project_id, instance_id
+    )
+    return bcs_app_request("PUT", url, params=params, data=data)
+
+
 def get_app_status(cc_app_id, project_id, instance_id):
     url = "{}/api/apigw/paas-cd/prod/apps/cc_app_ids/{}/projects/{}/instances/{}/status/".format(
         APIGW_HOST, cc_app_id, project_id, instance_id

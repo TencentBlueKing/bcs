@@ -2,10 +2,12 @@
 """
 滚动升级操作
 """
+import time
+
 from .python_atom_sdk import *
 sdk = AtomSDK()
 
-from .constants import MESOS_DEPLOYMENT_RESOURCE
+from .constants import MESOS_DEPLOYMENT_RESOURCE, WAIT_POLLING_TIME
 from .utils import validate_param
 from .polling_task import polling
 from .base import get_project_id, get_resource_kind, get_namespace, get_app_name
@@ -74,9 +76,10 @@ def rollingupdate(cc_app_id, project_id, params):
     }
     params_vars = params.get("vars") or '{}'
     data = {
-        "inst_id_list": [instance_id],
         "variable": json.loads(params_vars)
     }
-    bcs_app.rollingupdate_app(cc_app_id, project_id, req_params, data)
+    bcs_app.rollingupdate_app_new(cc_app_id, project_id, instance_id, req_params, data)
+    # 等待10s，然后再轮训
+    time.sleep(WAIT_POLLING_TIME)
     # 轮训任务状态
     polling(cc_app_id, project_id, instance_id)
