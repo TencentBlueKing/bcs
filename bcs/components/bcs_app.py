@@ -23,7 +23,8 @@ def get_cc_app_id(project_id):
 
 def get_cluster_list(project_id):
     url = "{}/api/apigw/bcs-cc/prod/projects/{}/clusters/".format(APIGW_HOST, project_id)
-    resp = bcs_app_request("GET", url)
+    params = {"desire_all_data": 1}
+    resp = bcs_app_request("GET", url, params=params)
     data = resp.get("data") or {}
     cluster_list = data.get("results") or []
     if not cluster_list:

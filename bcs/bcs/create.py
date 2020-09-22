@@ -4,7 +4,7 @@ import time
 from .python_atom_sdk import *
 sdk = AtomSDK()
 
-from .base import get_resource_kind
+from .base import get_resource_kind, get_namespace
 from .utils import validate_param
 from .constants import MESOS_RESOURCE_KIND_MAP, WAIT_POLLING_TIME
 from .polling_task import polling
@@ -33,17 +33,6 @@ def get_tmpl(params):
     tmpl_name = params.get("template_name")
     validate_param(tmpl_name, flag=u"模板")
     return tmpl_name
-
-
-def get_namespace_vars(params):
-    namespace_vars = params.get("namespace_vars")
-    validate_param(namespace_vars, flag=u"命名空间参数")
-    try:
-        namespace_vars = json.loads(namespace_vars)
-    except Exception as err:
-        sdk.log.error(u"解析命名空间参数失败, %s", str(err))
-        exit(-1)
-    return namespace_vars
 
 
 def get_tmpl_set_id(tmpl_set_name, tmpl_set_data):
@@ -97,10 +86,13 @@ def create(cc_app_id, project_id, params):
     tmpl_name = get_tmpl(params)
     tmpl_info = get_tmpl_detail(resource_kind, version_tmpls, tmpl_name)
     cluster_id = get_cluster_id(params)
-    namespace_vars = get_namespace_vars(params)
+    params_vars = json.loads(params.get("vars") or "{}")
+    ns_name = get_namespace(params)
     data = {
         "cluster_ns_info": {
-            cluster_id: namespace_vars
+            cluster_id: {
+                ns_name: params_vars
+            }
         },
         "version_id": version_info["id"],
         "show_version_id": version_info["show_version_id"],

@@ -15,3 +15,29 @@
 - signal
 - command
 
+## 安装插件
+
+1. 下载源码
+
+2. 打包文件
+
+```
+# 假设下载后的目录为 a
+
+cd a/bcs
+
+# 生成包: bcs-1.0.0.tar.gz
+python setup.py sdist
+```
+
+3. 创建一个目录，包含bcs-1.0.0.tar.gz和task.json，然后打包生成.zip的文件
+
+4. 打开`蓝盾`APP，选择`研发商店`，点击`工作台`，点击`新增插件`，输入相应的信息
+
+5. 回到插件列表页，选择`上架`，然后上传前面步骤生成的zip包，进行插件的安装
+
+6. 点击插件名称，选择 `设置` -> `私有设置`, 新增如下配置:
+   - APIGW_HOST: APIGW对应的host
+   - APP_CODE: 插件访问apigw时的应用编码
+   - APP_SECRET: 插件访问apigw时的应用TOKEN
+   - IAM_HOST: IAM对应的HOST
