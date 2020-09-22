@@ -35,7 +35,7 @@
                 "paramName": "name"
             }
         },
-        "oper_type": {
+        "op_type": {
             "label": "操作类型",
             "type": "selector",
             "groupName": "",
@@ -95,25 +95,28 @@
                 "operation": "OR",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
+                        "value": "create"
+                    },{
+                        "key": "op_type",
                         "value": "recreate"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "scale"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "rollingupdate"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "delete"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "delete"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "signal"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "command"
                     }
                 ]
@@ -127,25 +130,25 @@
                 "operation": "OR",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "recreate"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "scale"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "rollingupdate"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "delete"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "delete"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "signal"
                     },{
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "command"
                     }
                 ]
@@ -160,11 +163,11 @@
                 "operation": "OR",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "scale"
                     },
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "rollingupdate"
                     }
                 ]
@@ -178,7 +181,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "create"
                     }
                 ]
@@ -192,7 +195,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "rollingupdate"
                     }
                 ]
@@ -206,23 +209,8 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "create"
-                    }
-                ]
-            }
-        },
-        "vars": {
-            "label": "实例版本参数",
-            "type": "atom-ace-editor",
-            "placeholder": "请输入实例版本参数，格式: {key1: value1, key2: value2}",
-            "desc": "格式: {key1: value1, key2: value2}",
-            "rely": {
-                "operation": "AND",
-                "expression": [
-                    {
-                        "key": "oper_type",
-                        "value": "rollingupdate"
                     }
                 ]
             }
@@ -235,23 +223,26 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "create"
                     }
                 ]
             }
         },
-        "namespace_vars": {
-            "label": "命名空间参数",
+        "vars": {
+            "label": "实例版本参数",
             "type": "atom-ace-editor",
-            "placeholder": "请输入需要的命名空间参数",
-            "desc": "格式: {命名空间名称: {key1: value1, key2: value2}}",
+            "placeholder": "请输入实例版本参数，格式: {key1: value1, key2: value2}",
+            "desc": "格式: {key1: value1, key2: value2}",
             "rely": {
-                "operation": "AND",
+                "operation": "OR",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "create"
+                    },{
+                        "key": "op_type",
+                        "value": "rollingupdate"
                     }
                 ]
             }
@@ -264,7 +255,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "signal"
                     }
                 ]
@@ -278,7 +269,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "signal"
                     }
                 ]
@@ -293,7 +284,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "command"
                     }
                 ]
@@ -308,7 +299,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "command"
                     }
                 ]
@@ -323,7 +314,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "command"
                     }
                 ]
@@ -337,7 +328,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "command"
                     }
                 ]
@@ -351,7 +342,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "command"
                     }
                 ]
@@ -365,7 +356,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "command"
                     }
                 ]
@@ -380,7 +371,7 @@
                 "operation": "AND",
                 "expression": [
                     {
-                        "key": "oper_type",
+                        "key": "op_type",
                         "value": "command"
                     }
                 ]

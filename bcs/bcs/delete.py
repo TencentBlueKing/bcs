@@ -36,4 +36,4 @@ def delete(cc_app_id, project_id, params):
     # 等待10s
     time.sleep(WAIT_POLLING_TIME)
     # 轮训任务
-    polling(cc_app_id, project_id, instance_id, oper_type=DELETE_OPER)
+    polling(cc_app_id, project_id, instance_id, op_type=DELETE_OPER)

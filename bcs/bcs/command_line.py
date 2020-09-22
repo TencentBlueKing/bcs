@@ -35,11 +35,11 @@ OPER_FUNC_MAP = {
 
 
 def get_func(params):
-    oper_type = params.get("oper_type")
-    if oper_type not in OPER_FUNC_MAP:
-        sdk.log.error(u"操作类型不正确，当前的操作类型为: %s", oper_type)
+    op_type = params.get("op_type")
+    if op_type not in OPER_FUNC_MAP:
+        sdk.log.error(u"操作类型不正确，当前的操作类型为: %s", op_type)
         exit(-1)
-    return OPER_FUNC_MAP[oper_type]
+    return OPER_FUNC_MAP[op_type]
 
 
 def main():
