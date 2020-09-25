@@ -41,3 +41,8 @@ python setup.py sdist
    - APP_CODE: 插件访问apigw时的应用编码
    - APP_SECRET: 插件访问apigw时的应用TOKEN
    - IAM_HOST: IAM对应的HOST
+
+
+## 注意
+1. 申请网关: bcs-api, paas-cd, bcs-cc的资源的权限
+2. 权限中心升级后，需要在bcs saas对应的db: `bk_bcs_app`, table: `projects_functioncontroller`中添加func_code: `APP_CODE_SKIP_AUTH`, wlist: app_code，这里app_code为上面在`私有设置`中添加的APP_CODE
