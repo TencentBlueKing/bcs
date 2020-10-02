@@ -34,6 +34,8 @@ def polling(cc_app_id, project_id, instance_id, op_type=None):
             exit(-1)
         # 设置间隔，默认为5s
         time.sleep(INTERVAL)
+    
+    exit(-1)
 
 
 def command_polling(cc_app_id, project_id, instance_id, task_id):
@@ -60,8 +62,8 @@ def command_polling(cc_app_id, project_id, instance_id, task_id):
                 if t.get("status") == constants.TASK_FAILED_STATUS:
                     sdk.log.error(u"命令执行失败，%s", t.get("message"))
                     exit(-1)
+                inspect = t.get("commInspect") or {}
                 if t.get("status") == constants.TASK_FINISH_STATUS:
-                    inspect = t.get("commInspect") or {}
                     if inspect.get("exitCode") != 0:
                         sdk.log.error(u"命令执行失败，%s", inspect.get("stderr"))
                         exit(-1)
@@ -77,4 +79,4 @@ def command_polling(cc_app_id, project_id, instance_id, task_id):
         # 设置间隔，默认为10s
         time.sleep(INTERVAL)
 
-    exit(0)
+    exit(-1)
