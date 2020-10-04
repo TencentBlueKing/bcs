@@ -7,7 +7,7 @@ import json
 from .python_atom_sdk import *
 
 from .base import get_project_id, get_resource_kind, get_namespace, get_app_name
-from .utils import validate_param, validate_digit
+from .utils import validate_param, validate_gte_zero
 from .polling_task import command_polling
 from components import bcs_app
 
@@ -98,4 +98,6 @@ def command(cc_app_id, project_id, params):
         req_data["reserve_time"] = reserve_time
     task_id = bcs_app.send_command(cc_app_id, project_id, instance_id, req_data)
     # 开始轮训任务状态
-    command_polling(cc_app_id, project_id, instance_id, task_id)
+    # 获取超时时间
+    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
+    command_polling(cc_app_id, project_id, instance_id, task_id, timeout=timeout)

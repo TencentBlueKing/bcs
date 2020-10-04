@@ -8,7 +8,7 @@ from .python_atom_sdk import *
 sdk = AtomSDK()
 
 from .constants import MESOS_DEPLOYMENT_RESOURCE, WAIT_POLLING_TIME
-from .utils import validate_param
+from .utils import validate_param, validate_gte_zero
 from .polling_task import polling
 from .base import get_project_id, get_resource_kind, get_namespace, get_app_name
 from components import bcs_app
@@ -82,4 +82,5 @@ def rollingupdate(cc_app_id, project_id, params):
     # 等待10s，然后再轮训
     time.sleep(WAIT_POLLING_TIME)
     # 轮训任务状态
-    polling(cc_app_id, project_id, instance_id)
+    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
+    polling(cc_app_id, project_id, instance_id, timeout=timeout)

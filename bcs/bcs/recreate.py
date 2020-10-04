@@ -5,7 +5,7 @@ from .python_atom_sdk import *
 sdk = AtomSDK()
 
 from .base import get_resource_kind, get_namespace, get_app_name
-from .utils import validate_param
+from .utils import validate_param, validate_gte_zero
 from .polling_task import polling
 from .constants import WAIT_POLLING_TIME
 from components import bcs_app
@@ -36,4 +36,5 @@ def recreate(cc_app_id, project_id, params):
     # 等待10s
     time.sleep(WAIT_POLLING_TIME)
     # 轮训重建任务
-    polling(cc_app_id, project_id, instance_id)
+    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
+    polling(cc_app_id, project_id, instance_id, timeout=timeout)
