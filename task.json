@@ -376,6 +376,42 @@
                     }
                 ]
             }
+        },
+        "timeout": {
+            "label": "任务超时时间",
+            "type": "vuex-input",
+            "placeholder": "请输入任务超时时间，默认3600秒",
+            "desc": "超时时间，单位为秒",
+            "default": 3600,
+            "rely": {
+                "operation": "OR",
+                "expression": [
+                    {
+                        "key": "op_type",
+                        "value": "recreate"
+                    },
+                    {
+                        "key": "op_type",
+                        "value": "scale"
+                    },
+                    {
+                        "key": "op_type",
+                        "value": "rollingupdate"
+                    },
+                    {
+                        "key": "op_type",
+                        "value": "delete"
+                    },
+                    {
+                        "key": "op_type",
+                        "value": "create"
+                    },
+                    {
+                        "key": "op_type",
+                        "value": "command"
+                    }
+                ]
+            }
         }
     }
 }

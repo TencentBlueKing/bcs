@@ -11,8 +11,9 @@ from bcs import constants
 sdk = AtomSDK()
 
 
-def polling(cc_app_id, project_id, instance_id, op_type=None):
-    end_time = datetime.now() + timedelta(seconds=constants.POLLING_TIMEOUT)
+def polling(cc_app_id, project_id, instance_id, op_type=None, timeout=None):
+    timeout = timeout or constants.POLLING_TIMEOUT
+    end_time = datetime.now() + timedelta(seconds=timeout)
     while(True):
         if datetime.now() > end_time:
             sdk.log.error(u"轮训应用状态超时")
@@ -38,10 +39,11 @@ def polling(cc_app_id, project_id, instance_id, op_type=None):
     exit(-1)
 
 
-def command_polling(cc_app_id, project_id, instance_id, task_id):
+def command_polling(cc_app_id, project_id, instance_id, task_id, timeout=None):
     """轮训command任务执行状态
     """
-    end_time = datetime.now() + timedelta(seconds=constants.POLLING_COMMAND_TIMEOUT)
+    timeout = timeout or constants.POLLING_COMMAND_TIMEOUT
+    end_time = datetime.now() + timedelta(seconds=timeout)
     while(True):
         if datetime.now() > end_time:
             sdk.log.error(u"轮训任务状态超时")

@@ -7,6 +7,7 @@ sdk = AtomSDK()
 from . import base as params_utils
 from components import bcs_app
 from .constants import DELETE_OPER, WAIT_POLLING_TIME
+from .utils import validate_gte_zero
 
 from .polling_task import polling
 
@@ -36,4 +37,5 @@ def delete(cc_app_id, project_id, params):
     # 等待10s
     time.sleep(WAIT_POLLING_TIME)
     # 轮训任务
-    polling(cc_app_id, project_id, instance_id, op_type=DELETE_OPER)
+    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
+    polling(cc_app_id, project_id, instance_id, op_type=DELETE_OPER, timeout=timeout)

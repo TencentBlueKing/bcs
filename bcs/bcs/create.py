@@ -5,7 +5,7 @@ from .python_atom_sdk import *
 sdk = AtomSDK()
 
 from .base import get_resource_kind, get_namespace
-from .utils import validate_param
+from .utils import validate_param, validate_gte_zero
 from .constants import MESOS_RESOURCE_KIND_MAP, WAIT_POLLING_TIME
 from .polling_task import polling
 from components import bcs_app
@@ -110,4 +110,5 @@ def create(cc_app_id, project_id, params):
     # 等待10s
     time.sleep(WAIT_POLLING_TIME)
     # 轮训任务状态
-    polling(cc_app_id, project_id, instance_id_list[0])
+    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
+    polling(cc_app_id, project_id, instance_id_list[0], timeout=timeout)
