@@ -75,8 +75,7 @@ def command_polling(cc_app_id, project_id, instance_id, task_id, timeout=None):
         # 如果状态记录中只有一个finish状态, 并且是正常退出，则认为命令执行成功
         if len(status_set) == 1 and list(status_set)[0] == constants.TASK_NORMAL_STATUS:
             sdk.log.info(u"命令执行成功！")
-            break
-
+            exit(0)
 
         # 设置间隔，默认为10s
         time.sleep(INTERVAL)
