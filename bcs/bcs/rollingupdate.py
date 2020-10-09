@@ -82,5 +82,5 @@ def rollingupdate(cc_app_id, project_id, params):
     # 等待10s，然后再轮训
     time.sleep(WAIT_POLLING_TIME)
     # 轮训任务状态
-    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
+    timeout = validate_gte_zero(params.get("timeout"), flag=u"任务超时时间")
     polling(cc_app_id, project_id, instance_id, timeout=timeout)

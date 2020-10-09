@@ -110,5 +110,5 @@ def create(cc_app_id, project_id, params):
     # 等待10s
     time.sleep(WAIT_POLLING_TIME)
     # 轮训任务状态
-    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
+    timeout = validate_gte_zero(params.get("timeout"), flag=u"任务超时时间")
     polling(cc_app_id, project_id, instance_id_list[0], timeout=timeout)

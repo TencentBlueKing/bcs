@@ -99,5 +99,5 @@ def command(cc_app_id, project_id, params):
     task_id = bcs_app.send_command(cc_app_id, project_id, instance_id, req_data)
     # 开始轮训任务状态
     # 获取超时时间
-    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
+    timeout = validate_gte_zero(params.get("timeout"), flag=u"任务超时时间")
     command_polling(cc_app_id, project_id, instance_id, task_id, timeout=timeout)
