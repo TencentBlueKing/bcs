@@ -36,5 +36,5 @@ def recreate(cc_app_id, project_id, params):
     # 等待10s
     time.sleep(WAIT_POLLING_TIME)
     # 轮训重建任务
-    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
+    timeout = validate_gte_zero(params.get("timeout"), flag=u"任务超时时间")
     polling(cc_app_id, project_id, instance_id, timeout=timeout)

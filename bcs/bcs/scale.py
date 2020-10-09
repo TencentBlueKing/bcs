@@ -35,6 +35,7 @@ def scale(cc_app_id, project_id, params):
     app_name = get_app_name(params)
     instance_id = get_instance_id(cc_app_id, project_id, resource_kind, ns_name, app_name)
     instance_count = get_instance_count(params)
+    timeout = validate_gte_zero(params.get("timeout"), flag=u"任务超时时间")
     # 下发任务
     params = {"instance_num": instance_count}
     data = {"inst_id_list": [instance_id]}
@@ -42,5 +43,4 @@ def scale(cc_app_id, project_id, params):
     # 等待10s
     time.sleep(WAIT_POLLING_TIME)
     # 开始轮训任务
-    timeout = validate_gte_zero(params.get("timeout"), flag="任务超时时间")
     polling(cc_app_id, project_id, instance_id, timeout=timeout)
