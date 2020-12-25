@@ -15,8 +15,11 @@ STATUS404 = 404
 def http_request(method, url, params=None, data=None, **kwargs):
     try:
         resp = requests.request(method, url, params=params, json=data, timeout=TIMEOUT, **kwargs)
-    except Exception as err:
-        sdk.log.error("request error, %s", err)
+    except requests.exceptions.RequestException as e:
+        sdk.log.error("request exceptions, %s", e)
+        exit(-1)
+    except Exception as e:
+        sdk.log.error("request error, %s", e)
         exit(-1)
 
     resp_json = resp.json()

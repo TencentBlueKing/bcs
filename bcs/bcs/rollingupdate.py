@@ -4,14 +4,15 @@
 """
 import time
 
+from components import bcs_app
+
 from .python_atom_sdk import *
 sdk = AtomSDK()
 
-from .constants import MESOS_DEPLOYMENT_RESOURCE, WAIT_POLLING_TIME
+from .constants import WAIT_POLLING_TIME
 from .utils import validate_param, validate_gte_zero
 from .polling_task import polling
 from .base import get_project_id, get_resource_kind, get_namespace, get_app_name
-from components import bcs_app
 
 
 def get_cluster_id(params):

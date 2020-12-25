@@ -4,12 +4,13 @@
 """
 import json
 
+from components import bcs_app
+
 from .python_atom_sdk import *
 
 from .base import get_project_id, get_resource_kind, get_namespace, get_app_name
 from .utils import validate_param, validate_gte_zero
 from .polling_task import command_polling
-from components import bcs_app
 
 sdk = AtomSDK()
 
@@ -55,8 +56,10 @@ def get_vars(params):
         return []
     try:
         vars = json.loads(vars)
-    except Exception as err:
-        sdk.log.error(u"参数【环境变量】格式不正确, 错误: %s", str(err))
+    except ValueError as e:
+        sdk.log.error(u"参数【环境变量】格式不正确, 错误: %s", str(e))
+    except Exception as e:
+        sdk.log.error(u"参数【环境变量】格式不正确, 错误: %s", str(e))
         exit(-1)
     if not vars:
         return []

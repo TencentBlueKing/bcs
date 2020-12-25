@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 import time
 
+from components import bcs_app
+
 from .python_atom_sdk import *
 sdk = AtomSDK()
 
 from .base import get_resource_kind, get_namespace, get_app_name
-from .utils import validate_param, validate_gte_zero
+from .utils import validate_gte_zero
 from .polling_task import polling
 from .constants import WAIT_POLLING_TIME
-from components import bcs_app
 
 
 def get_instance_id(cc_app_id, project_id, resource_kind, ns_name, app_name):
