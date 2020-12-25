@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from components import bcs_app
+
 from .python_atom_sdk import *
 sdk = AtomSDK()
 
 from .utils import validate_param, validate_digit
 from .constants import MESOS_APPLICATION_RESOURCE
-from components import bcs_app
 
 from .base import get_resource_kind, get_namespace, get_app_name
 

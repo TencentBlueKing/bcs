@@ -2,11 +2,11 @@
 import time
 from datetime import datetime, timedelta
 
-from .python_atom_sdk import *
-
 from bcs.constants import POLLING_TIMEOUT, NORMAL_STATUS, INTERVAL, ABNORMAL_STATUS
 from components import bcs_app
 from bcs import constants
+
+from .python_atom_sdk import *
 
 sdk = AtomSDK()
 
@@ -20,7 +20,7 @@ def polling(cc_app_id, project_id, instance_id, op_type=None, timeout=None):
             exit(-1)
         try:
             resp = bcs_app.get_app_status(cc_app_id, project_id, instance_id)
-        except Exception:
+        except Exception:  # pylint: disable=broad-except
             time.sleep(INTERVAL)
             continue
         app_status = resp.get("data") or {}
@@ -50,7 +50,7 @@ def command_polling(cc_app_id, project_id, instance_id, task_id, timeout=None):
             break
         try:
             data = bcs_app.get_task_status(cc_app_id, project_id, instance_id, task_id)
-        except Exception:
+        except Exception:  # pylint: disable=broad-except
             time.sleep(INTERVAL)
             continue
         # 解析任务状态

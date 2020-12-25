@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import time
 
+from components import bcs_app
+
 from .python_atom_sdk import *
 sdk = AtomSDK()
 
 from . import base as params_utils
-from components import bcs_app
 from .constants import DELETE_OPER, WAIT_POLLING_TIME
 from .utils import validate_gte_zero
 

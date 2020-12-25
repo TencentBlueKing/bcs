@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import time
 
+from components import bcs_app
+
 from .python_atom_sdk import *
 sdk = AtomSDK()
 
@@ -8,7 +10,6 @@ from .base import get_resource_kind, get_namespace
 from .utils import validate_param, validate_gte_zero
 from .constants import MESOS_RESOURCE_KIND_MAP, WAIT_POLLING_TIME
 from .polling_task import polling
-from components import bcs_app
 
 
 def get_cluster_id(params):

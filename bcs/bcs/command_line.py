@@ -4,6 +4,8 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+from components import bcs_app
+
 from .python_atom_sdk import *
 sdk = AtomSDK()
 
@@ -17,7 +19,6 @@ from .delete import delete
 
 from .constants import MESOS_RESOURCE_KIND_MAP
 from .base import get_project_id, get_resource_kind
-from components import bcs_app
 
 ###########################################################
 # 因为蓝盾和容器服务的项目现阶段没有关联，因此，需要用户自己选择项目
